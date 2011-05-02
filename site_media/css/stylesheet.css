@@ -79,7 +79,7 @@ body {
 h1 { font-size:48px; line-height:64px; letter-spacing: 0px; }
 
 h2 {
-	width:300px;
+	width:320px;
 	float:left;
 	font-size:40px;
 	line-height:58px;
@@ -107,15 +107,13 @@ strong {font-weight:bold;color:#ff9000;text-transform:uppercase;}
 a       {color:#fff;border-bottom:1px solid; text-decoration: none;}
 a:hover {color:#ff9000;}
 
+dl  { position: relative;}
+dt  { float: left; width: 90px; text-align: right;}
+dd  { margin-left: 100px; }
+
 .o {color:#ff9000}
 
-.number {
-	float:right;
-	color:#fff;
-	font-family:Times, Georgia, Serif;
-	font-size:30px;
-	line-height:30px;
-}
+.number { float:right; color:#fff; font-family:Times, Georgia, Serif; font-size:30px; line-height:30px; }
 
 
 /*--- Layout ---*/
@@ -155,16 +153,18 @@ a:hover {color:#ff9000;}
 .box {
 	float:left;
 	width:100%;
-	margin:70px 30px 0 0;
+	margin:30px 30px 0 0;
 	padding:10px 0 0 0;
 	background:url(../images/box-bg.png) top left repeat-x
 }
 .small { width: 260px;}
 .big   { width: 670px;}
 .third { width: 300px;}
+.twothirds { width: 630px;}
 .caps { text-transform:uppercase; }
 .float-right { float: right; }
 .float-left { float: left; }
+.padding-right { margin-right: 12px;}
 
 .sidenote p {
 	text-align:right;
@@ -191,7 +191,7 @@ a:hover {color:#ff9000;}
 	background:url(../images/footer-bg.png) bottom left repeat-x;
 }
 .inner {width:960px;margin:0 auto;padding:40px 0 0 0;}
-#footer img, #footer p {margin:0 53px 10px 0; width:200px;float:left}
+.colorco {margin:0 53px 10px 0; width:200px;float:left}
 
 .credits {margin:35px 0 0 0;font-size:13px}
 .credits a {text-decoration:none;}

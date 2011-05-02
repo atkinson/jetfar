@@ -31,6 +31,7 @@
 # mezzanine.conf.defaults as is the case with the above settings.
 USE_SOUTH = False
 
+SITE_TITLE = 'Sydney Web Developer - Rich Atkinson'
 
 ########################
 # MAIN DJANGO SETTINGS #
