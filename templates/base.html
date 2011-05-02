@@ -1,0 +1,102 @@
+{% load pages_tags i18n %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!--
+	**************************************************************
+	*                                                            *
+	*       Thanks for your interest in the source code!         *
+	* Designed and hand coded by John O'Nolan @ LyricalMedia.com *
+	*                                                            *
+	**************************************************************
+-->
+
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="{% block meta_keywords %}{% endblock %}" /> 
+    <meta name="description" content="{% block meta_description %}{% endblock %}" /> 
+ 
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="{% url blog_post_feed "rss" %}" />
+    <link rel="alternate" type="application/atom+xml" title="Atom" href="{% url blog_post_feed "atom" %}" />
+        
+    <title>{% block meta_title %}{% endblock %}{% if settings.SITE_TITLE %} | {{ settings.SITE_TITLE }}{% endif %}</title>
+
+	<link rel="stylesheet" href="{{ MEDIA_URL }}css/stylesheet.css" type="text/css" media="screen" /> 
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js">
+    </script>
+	<script type="text/javascript" src="{{ MEDIA_URL }}js/cufon-yui.js"></script>
+	<script type="text/javascript" src="{{ MEDIA_URL }}js/CartoGothic_Std_400-CartoGothic_Std_700-CartoGothic_Std_italic_400-CartoGothic_Std_italic_700.font.js"></script>
+	<script type="text/javascript">
+		Cufon.replace('h1')('h2')('h4')('p');
+	</script>
+</head>
+<body id="{% block body_id %}{% endblock %}">
+	<div id="wrapper">
+		<div id="header">
+		    {% page_menu "pages/menus/primary.html" %}
+
+			<span id="navnumber" class="number">000</span>
+			<!-- <img id="logo" src="images/logo.png" alt="O'No! Typography, The Best Place on The Web" /> -->
+			<div class="logo"><span class="o">Rich</span><br/>atkinson
+			    <h1><span class='caps'><span class='o'>Sydney </span>Web Developer</span></h1>
+			</div>
+			<h2><span class="o">&quot;</span>(<span class="o">really</span>) stunning web experiences<span class="o">&quot;</span></h2>
+			<div class="clearfix"></div>
+		</div><!--header-->
+		<div id="content">
+		{% block content %}
+			<div class="box">
+				<h3>{% block title %}{% endblock %}</h3><span class="number">001</span>
+				<div class="clearfix"></div>
+				<div class="sidenote left small">
+					<p class="o">001. Freelancer</p>
+					<p>I have 15 years experience as a web consultant.</p>
+				</div>
+				<div class="right big">
+					<p>I am a specialist in building web sites and applications to help businesses improve their bottom line.</p>
+					<p>If you need a veteran web specialist for your project, you should contact me to discuss your needs.</p>
+				</div>
+			</div><!--about-->
+			
+			<div class="box left third">
+				<h3>Portfolio</h3><span class="number">002</span>
+				<div class="clearfix"></div>
+				<p><strong>Lorem ipsum</strong> dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+				<p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim. <a href="#">Read More...</a></p>
+			</div><!--portfolio"-->
+			<div class="box left third">
+				<h3>Blog</h3><span class="number">003</span>
+				<div class="clearfix"></div>
+				<p><strong>Lorem ipsum</strong> dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna eiusmod aliqua.</p>
+				<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla voluptate pariatur.</p>
+				<p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui. <a href="#">Read More...</a></p>
+			</div><!--blog"-->
+			<div class="box last third">
+				<h3>Contact</h3><span class="number">004</span>
+				<div class="clearfix"></div>
+				<p><strong>Lorem ipsum</strong> dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+				<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+				<p>Excepteur sint occaecat cupidatat non proident, sunt in. <a href="#">Read More...</a></p>
+			</div><!--contact"-->
+			
+		{% endblock content %}
+		</div><!--content-->
+	</div><!--wrapper-->
+	<div id="footer">
+		<div class="inner">
+			<img src="images/typ.png" alt="typ" />
+			<img src="images/og.png" alt="og" />
+			<img src="images/rap.png" alt="rap" />
+			<img class="right" src="images/hy.png" alt="hy" />
+			<p>01. Lorem ipsum sut dolor</p>
+			<p>02. Lorem ipsum sut dolor</p>
+			<p>03. Lorem ipsum sut dolor</p>
+			<p class="right">04. Lorem ipsum sut dolor</p>
+			<div class="clearfix"></div>
+			<div class="credits left"> <span class="o">&copy;</span> Rich Atkinson 2011</div>
+			<div class="credits right">All Rights Reserved</div>
+		</div>
+	</div><!--footer-->
+<script type="text/javascript">Cufon.now();</script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+{% extends "blog/blog_post_list.html" %}
+{% load mezzanine_tags comment_tags keyword_tags rating_tags i18n %}
+
+{% block meta_title %}{{ blog_post.title }}{% endblock %}
+
+{% block meta_keywords %}{% metablock %}
+{% for keyword in blog_post.keywords.all %}
+    {% if not forloop.first %}, {% endif %}
+    {{ keyword }}
+{% endfor %}
+{% endmetablock %}{% endblock %}
+
+{% block meta_description %}{% metablock %}
+{{ blog_post.description }}
+{% endmetablock %}{% endblock %}
+
+{% block title %}
+{% editable blog_post.title %}{{ blog_post.title }}{% endeditable %}
+{% endblock %}
+
+{% block extra_head %}
+<script type="text/javascript">
+    $(function() {
+        $('.reply').click(function() {
+            $(this).next('.comment').toggle();
+        });
+    });
+</script>
+{% endblock %}
+
+{% block breadcrumb_menu %}
+<ul>
+    <li><a href="{% url home %}">{% trans "Home" %}</a> &gt;</li>
+    <li><a href="{% url blog_post_list %}">{{ blog_page.title }}</a> &gt;</li>
+    <li>{{ blog_post.title }}</li>
+</ul><br />
+{% endblock %}
+
+{% block content %}
+<div class="box">
+    <h3>{{ blog_post.title }}</h3><span class="number">001</span>
+        <div class="sidenote left small">
+        	<p class="o">001. {{ blog_post.title }}</p>
+        	<p>
+                    {% trans "Posted by" %}:
+                        {% with blog_post.user as author %}
+                        <a href="{% url blog_post_list_author author %}"
+                            >{{ author.get_full_name|default:author.username }}</a>
+                        {% endwith %}
+                    <br/>
+                    {{ blog_post.publish_date|timesince }} {% trans "ago" %}
+        	</p>
+        	<p>(<a href="#comments">{% spaceless %}
+                    {% blocktrans count blog_post.comments_count as comments_count %}
+                    1 comment
+                    {% plural %}
+                    {{ comments_count }} comments
+                    {% endblocktrans %}
+                {% endspaceless %}</a>)
+            </p>
+        </div>
+    
+    <div class="right big">
+        {{ blog_post.content|safe }}
+
+        {% keywords_for blog_post as tags %}
+        {% if tags %}
+        <div class="clearfix"></div>
+        <div class="tags">
+            <span>{% trans "Tags" %}:</span>
+                {% for tag in tags %}
+                <span> <a href="{% url blog_post_list_tag tag.slug %}" class="tag-weight-{{ tag.weight }}">{{ tag }}</a></span>
+                {% endfor %}
+        </div>
+        {% endif %}
+        <div class="clearfix"></div>
+
+        </div>
+        <div class="clearfix"></div>
+        <div id="comments">
+        {% if use_disqus %}
+        {% include "generic/includes/disqus_comments.html" %}
+        {% else %}
+        {% comments_for blog_post %}
+        {% endif %}
+        </div>
+    </div><!-- right -->
+</div><!-- box -->
+<div class="clearfix"></div>
+{% endblock content %}

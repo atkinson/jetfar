@@ -1,0 +1,81 @@
+{% extends "blog/blog_base.html" %}
+{% load i18n mezzanine_tags blog_tags %}
+
+{% block meta_title %}{{ blog_page.title }}{% endblock %}
+
+{% block meta_keywords %}{% metablock %}
+{% for keyword in blog_page.keywords.all %}
+    {% if not forloop.first %}, {% endif %}
+    {{ keyword }}
+{% endfor %}
+{% endmetablock %}{% endblock %}
+
+{% block meta_description %}{% metablock %}
+{{ blog_page.description }}
+{% endmetablock %}{% endblock %}
+
+{% block title %}
+{% editable blog_page.title %}{{ blog_page.title }}{% endeditable %}
+{% endblock %}
+
+{% block content %}
+<div class="box">
+    <h3>
+    {% if tag or category or year or month or author %}
+        {% if tag %}
+            {% trans "Viewing posts tagged" %} {{ tag }}
+        {% else %}{% if category %}
+            {% trans "Viewing posts for the category" %} {{ category }}
+        {% else %}{% if year or month %}
+            {% trans "Viewing posts from" %} {% if month %}{{ month }}, {% endif %}{{ year }}
+        {% else %}{% if author %}
+            {% trans "Viewing posts by" %} {{ author.get_full_name|default:author.username }}
+        {% endif %}{% endif %}{% endif %}{% endif %}
+    {% else %}
+        Personal Weblog
+    {% endif %}
+    </h3><span class="number">001</span>
+    <div class="clearfix"></div>
+    
+
+
+{% for blog_post in blog_posts.object_list %}
+    <div class="sidenote left small">
+    	<p class="o">001. {{ blog_post.title }}</p>
+    	<p>
+            {{ blog_post.publish_date|timesince }} {% trans "ago" %}
+    	</p>
+    </div>
+
+    <div class="right big">
+        {{ blog_post.description_from_content|striptags }} <a href="{% url blog_post_detail blog_post.slug %}">{% trans "read more" %}</a> 
+        <div class="clearfix"></div>
+        <p class="description">
+            {% if use_disqus %}
+            <a href="{% url blog_post_detail blog_post.slug %}#disqus_thread">
+                {% trans "Comments" %}
+            </a>
+            {% else %}
+            <a href="{% url blog_post_detail blog_post.slug %}#comments">{% blocktrans count blog_post.comments_count as comments_count %}
+                1 comment{% plural %}{{ comments_count }} comments
+                {% endblocktrans %}
+            </a>
+            {% endif %}
+        </p>
+    </div><!-- right -->
+<div class="clearfix"></div>
+<br/>
+{% endfor %}
+</div><!--box-->
+{% pagination_for blog_posts %} 
+
+{% if use_disqus %}
+{% include "blog/includes/disqus_counts.html" %} 
+{% endif %}
+
+{% endblock content %}
+
+{% block right_panel %}
+{% include "blog/includes/filter_panel.html" %}
+{% endblock %}
+
